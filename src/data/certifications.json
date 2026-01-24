@@ -1,0 +1,54 @@
+{
+  "certifications": [
+    {
+      "id": "cert-001",
+      "name": "SnowPro Core Certification",
+      "issuer": "Snowflake",
+      "logo": "/images/certifications/snowflake_logo.svg",
+      "credentialUrl": null,
+      "pdfUrl": "/documents/certifications/Snowpro Associate - Platform.pdf",
+      "issueDate": "2024-01",
+      "expiryDate": null
+    },
+    {
+      "id": "cert-002",
+      "name": "Oracle Certified Foundation Associate",
+      "issuer": "Oracle",
+      "logo": "/images/certifications/oracle_logo.svg",
+      "credentialUrl": null,
+      "pdfUrl": "/documents/certifications/OCI_2025_CertifiedAIFoundationsAssociate.pdf",
+      "issueDate": null,
+      "expiryDate": null
+    },
+     {
+      "id": "cert-003",
+      "name": "Mindshift: Break Through Obstacles to Learning and Discover Your Hidden Potential",
+      "issuer": "McMaster University",
+      "logo": "/images/certifications/mcmaster_logo.webp",
+      "credentialUrl": null,
+      "pdfUrl": "/documents/certifications/McMaster - Mindshift.pdf",
+      "issueDate": null,
+      "expiryDate": null
+    },
+      {
+      "id": "cert-004",
+      "name": "Learning How to Learn: Powerful mental tools to help you master tough subjects",
+      "issuer": "McMaster University",
+      "logo": "/images/certifications/mcmaster_logo.webp",
+      "credentialUrl": null,
+      "pdfUrl": "/documents/certifications/McMaster - Learn How to Learn.pdf",
+      "issueDate": null,
+      "expiryDate": null
+    },
+    {
+      "id": "cert-005",
+      "name": "Responsible Conduct of Research",
+      "issuer": "CITI Program",
+      "logo": "/images/certifications/citi_logo.png",
+      "credentialUrl": null,
+      "pdfUrl": "/documents/certifications/citi_program.webp",
+      "issueDate": null,
+      "expiryDate": null
+    }
+  ]
+}

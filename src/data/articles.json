@@ -1,0 +1,58 @@
+{
+  "articles": [
+    {
+      "id": "article-001",
+      "slug": "distributed-spatial-analysis-h3",
+      "title": "Distributed Spatial Analysis with Uber H3 and PySpark",
+      "excerpt": "Building a scalable geospatial data lake on AWS to analyze economic resilience across Mexico using hierarchical spatial indexing and distributed computing.",
+      "publishedAt": "2025-12-15",
+      "readTimeMinutes": 12,
+      "tags": ["aws", "pyspark", "geospatial", "data-engineering"]
+    },
+    {
+      "id": "article-002",
+      "slug": "mlops-kedro-mlflow",
+      "title": "Building Reproducible ML Pipelines with Kedro and MLflow",
+      "excerpt": "A practical guide to engineering modular time series forecasting pipelines with experiment tracking, versioning, and containerization for production deployment.",
+      "publishedAt": "2025-06-20",
+      "readTimeMinutes": 10,
+      "tags": ["mlops", "kedro", "mlflow", "docker"]
+    },
+    {
+      "id": "article-003",
+      "slug": "fine-tuning-gpt4-government",
+      "title": "Fine-tuning GPT-4 for Government Applications",
+      "excerpt": "How we fine-tuned GPT-4o Mini to automate public fund allocation scoring, achieving 0.75 F1 score on unstructured Excel data extraction.",
+      "publishedAt": "2025-03-10",
+      "readTimeMinutes": 8,
+      "tags": ["llm", "gpt-4", "fine-tuning", "government"]
+    },
+    {
+      "id": "article-004",
+      "slug": "topological-data-analysis-gravitational-waves",
+      "title": "Detecting Gravitational Waves with Topological Data Analysis",
+      "excerpt": "Using Takens Embedding and persistent homology to extract topological features for CNN-based gravitational wave signal detection.",
+      "publishedAt": "2024-06-15",
+      "readTimeMinutes": 15,
+      "tags": ["tda", "deep-learning", "physics", "pytorch"]
+    },
+    {
+      "id": "article-005",
+      "slug": "solving-optw-gams",
+      "title": "Solving the Orienteering Problem with Time Windows",
+      "excerpt": "A deep dive into formulating and solving multi-objective route optimization problems using GAMS and real-world geospatial constraints.",
+      "publishedAt": "2023-06-25",
+      "readTimeMinutes": 11,
+      "tags": ["operations-research", "optimization", "gams"]
+    },
+    {
+      "id": "article-006",
+      "slug": "rna-structure-hpc",
+      "title": "High-Performance RNA Structure Analysis with SLURM",
+      "excerpt": "Engineering scalable bioinformatics pipelines on HPC clusters to process thousands of RNA structures using graph isomorphism algorithms.",
+      "publishedAt": "2024-12-05",
+      "readTimeMinutes": 9,
+      "tags": ["hpc", "bioinformatics", "slurm", "python"]
+    }
+  ]
+}

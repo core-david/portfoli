@@ -1,0 +1,21 @@
+ {
+"education": [
+    {
+      "id": "e-001",
+      "company": "Tecnológico de Monterrey",
+      "companyLogo": "/images/companies/tec_mty_logo.svg",
+      "location": "Monterrey, Mexico",
+      "degree:": "Bachelors of Engineering",
+      "major": "Data Science",
+      "minor": "Matematics",
+      "startDate": "2021-08",
+      "endDate": "2025-06",
+      "impactPoints": [
+        "Scholarship for Academic Excellence.",
+        "Member of Academic Group IAnswers."
+      ],
+      "Relevant Courses": ["Data Structures & Algorithms", "Deep Learning", "MLOps", "Probability",
+       "Multivariate Statistics", "Discrete & Stochastic Optimization", "Topology Data Analysis", 
+       "Cryptography", "Control Theory."]
+    }
+]}

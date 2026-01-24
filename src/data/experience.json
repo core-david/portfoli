@@ -1,0 +1,50 @@
+{
+  "experiences": [
+    {
+      "id": "exp-001",
+      "company": "Aurora University",
+      "companyLogo": "/images/companies/aurora_logo.svg",
+      "location": "Remote",
+      "role": "Data Science Professor",
+      "startDate": "2025-09",
+      "endDate": null,
+      "current": true,
+      "impactPoints": [
+        "Taught probability distributions and combinatorial methods applied to data science problems",
+        "Taught core CS foundations including algorithm complexity, graph and tree algorithms",
+        "Taught image processing and data visualization techniques, covering 2D/3D transformations and statistical graphics libraries (Matplotlib, Seaborn, ggplot2)"
+      ],
+      "techStack": ["Python", "R", "Matplotlib", "Seaborn", "ggplot2", "NumPy"]
+    },
+    {
+      "id": "exp-002",
+      "company": "Purdue University",
+      "companyLogo": "/images/companies/purdue_logo.svg",
+      "location": "West Lafayette, IN",
+      "role": "Computational Researcher",
+      "startDate": "2024-08",
+      "endDate": "2024-12",
+      "current": false,
+      "impactPoints": [
+        "Researched RNA secondary structure prediction, building computational tools to support biological function discovery",
+        "Engineered high throughput HPC pipeline using SLURM job scheduling and graph isomorphism algorithms, processing 10,000+ RNA structures"
+      ],
+      "techStack": ["Python", "SLURM", "HPC", "Git", "Graph Algorithms", "Linux"]
+    },
+    {
+      "id": "exp-003",
+      "company": "Expertos Mindfulness",
+      "companyLogo": "/images/companies/expertos_logo.svg",
+      "location": "Freelance",
+      "role": "Web Developer",
+      "startDate": "2023-01",
+      "endDate": "2023-06",
+      "current": false,
+      "impactPoints": [
+        "Developed a responsive website using Node.js, Express, and EJS",
+        "Structured and organized site content to ensure clarity and ease of navigation"
+      ],
+      "techStack": ["Node.js", "Express", "EJS", "JavaScript", "HTML", "CSS"]
+    }
+  ]
+}
