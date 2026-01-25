@@ -7,6 +7,7 @@ interface UseTypewriterOptions {
   typeSpeed?: number;
   deleteSpeed?: number;
   delayBetweenWords?: number;
+  startDelay?: number;
 }
 
 export function useTypewriter({
@@ -14,10 +15,19 @@ export function useTypewriter({
   typeSpeed = 50,
   deleteSpeed = 30,
   delayBetweenWords = 2000,
+  startDelay = 3000,
 }: UseTypewriterOptions) {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [currentText, setCurrentText] = useState('');
+  // Initialize with first word for immediate LCP
+  const [currentText, setCurrentText] = useState(words[0] || '');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  // Delay animation start to avoid blocking main thread during page load
+  useEffect(() => {
+    const timer = setTimeout(() => setHasStarted(true), startDelay);
+    return () => clearTimeout(timer);
+  }, [startDelay]);
 
   const type = useCallback(() => {
     const currentWord = words[currentWordIndex];
@@ -43,11 +53,20 @@ export function useTypewriter({
   }, [currentText, currentWordIndex, isDeleting, words, delayBetweenWords]);
 
   useEffect(() => {
+    // Don't animate until startDelay has passed
+    if (!hasStarted) return;
+
+    // On first start, begin by deleting the initial word (short pause then delete)
+    if (hasStarted && currentText === words[0] && !isDeleting && currentWordIndex === 0) {
+      const initTimer = setTimeout(() => setIsDeleting(true), 500);
+      return () => clearTimeout(initTimer);
+    }
+
     const speed = isDeleting ? deleteSpeed : typeSpeed;
     const timer = setTimeout(type, speed);
 
     return () => clearTimeout(timer);
-  }, [type, isDeleting, typeSpeed, deleteSpeed]);
+  }, [type, isDeleting, typeSpeed, deleteSpeed, hasStarted, currentText, words, currentWordIndex, delayBetweenWords]);
 
   return { text: currentText, isDeleting };
 }

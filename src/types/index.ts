@@ -36,6 +36,8 @@ export interface Certification {
   expiryDate: string | null;
 }
 
+export type ProjectCategory = 'mlops' | 'data-science';
+
 export interface Project {
   id: string;
   name: string;
@@ -45,6 +47,7 @@ export interface Project {
   techStack: string[];
   githubUrl: string | null;
   demoUrl: string | null;
+  category: ProjectCategory;
   featured: boolean;
   order: number;
 }

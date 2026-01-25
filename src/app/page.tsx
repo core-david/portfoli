@@ -1,6 +1,7 @@
 import HeroSection from '@/components/home/HeroSection';
-import ExperienceSection from '@/components/experience/ExperienceSection';
+import FeaturedWorkSection from '@/components/home/FeaturedWorkSection';
 import EducationSection from '@/components/education/EducationSection';
+import ExperienceSection from '@/components/experience/ExperienceSection';
 import CertificationsSection from '@/components/certifications/CertificationsSection';
 
 export default function HomePage() {
@@ -8,6 +9,9 @@ export default function HomePage() {
     <div>
       {/* Hero Section */}
       <HeroSection />
+
+      {/* Featured Work Section */}
+      <FeaturedWorkSection />
 
       {/* Education Section */}
       <EducationSection />

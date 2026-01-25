@@ -25,28 +25,30 @@ portfolio/
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx              # Root layout + Navbar
-│   │   ├── page.tsx                # Home (Hero + Education + Experience + Certs)
+│   │   ├── page.tsx                # Home (Hero + Featured + Edu + Exp + Certs)
 │   │   ├── globals.css             # Tailwind theme + animations
-│   │   ├── projects/page.tsx
+│   │   ├── projects/page.tsx       # Projects grid with category filtering
 │   │   └── engineering-log/page.tsx
 │   ├── components/
 │   │   ├── layout/{Navbar,Footer,Container}.tsx
-│   │   ├── home/{HeroSection,SearchPlaceholder}.tsx
+│   │   ├── home/{HeroSection,SearchPlaceholder,FeaturedWorkSection,FeaturedProjectCard}.tsx
 │   │   ├── experience/{ExperienceSection,Timeline,TimelineItem,TechBadge}.tsx
 │   │   ├── education/{EducationSection,EducationCard}.tsx
 │   │   ├── certifications/{CertificationsSection,CertificationNode}.tsx
+│   │   ├── projects/{CategoryFilter}.tsx
 │   │   └── ui/{AnimatedSection}.tsx
 │   ├── data/
 │   │   ├── site-config.json
 │   │   ├── experience.json
 │   │   ├── education.json
 │   │   ├── certifications.json
-│   │   ├── projects.json
+│   │   ├── projects.json           # Includes category, featured, thumbnail fields
 │   │   └── articles.json
 │   ├── hooks/
 │   │   ├── useTypewriter.ts        # Typewriter animation hook
-│   │   └── useIntersectionObserver.ts  # Scroll animation hook
-│   └── types/index.ts              # TypeScript interfaces
+│   │   ├── useIntersectionObserver.ts  # Scroll animation hook
+│   │   └── useCategoryFilter.ts    # URL-based filter state (Phase 3)
+│   └── types/index.ts              # TypeScript interfaces (incl. ProjectCategory)
 ```
 
 ---
@@ -153,74 +155,104 @@ portfolio/
 
 ---
 
-### Phase 3: Projects & Engineering Log Enhancement
+### Phase 3: Projects Enhancement ✅ COMPLETE
 
-**Projects Page - Category Filtering:**
-14. Add `category` field to projects.json schema
-15. Create filter UI component with category pills/tabs
-16. Implement client-side filtering with URL query params
-17. Add "All" option and active state styling
-18. Animate filter transitions (fade in/out cards)
+**Part A: Featured Work Section (Home Page)**
 
-**Engineering Log - Substack Integration:**
-19. Evaluate integration approach (embed vs API vs RSS)
-20. Create Substack embed component or RSS feed parser
-21. Update Engineering Log page layout
-22. Add "Subscribe" CTA linking to Substack
-23. Style embedded content to match terminal theme
+14. **[x] Create `FeaturedWorkSection` component**
+    - Location: After HeroSection, before EducationSection
+    - Display 4 flagship projects in 2x2 grid
+    - "View all projects →" link to /projects
 
-**Project Categories (based on current projects):**
-- All
-- Data Engineering (AWS, Airflow, Spark)
-- MLOps (Kedro, MLflow, Docker)
-- AI/LLM (OpenAI, GPT, Fine-tuning)
-- Data Science (ML, Statistics, GeoPandas)
-- Deep Learning (PyTorch, CNN, TDA)
-- Operations Research (Optimization, GAMS)
+15. **[x] Create `FeaturedProjectCard` component**
+    - Project name + summary (displayed directly on card)
+    - Category badge (color-coded: MLOps=primary green, Data Science=purple)
+    - Top 4 tech stack badges
+    - GitHub/Demo link buttons (no navigation to detail page)
+    - Hover animation (border glow)
+    - **Note:** Cards are self-contained; clicking does NOT navigate to a detail page (v2 feature)
+
+**Part B: Projects Page Category Filter**
+
+16. **[x] Add `category` field to projects.json schema**
+    - Categories: `"mlops"` | `"data-science"`
+    - Add `featured: true` to 4 flagship projects
+
+17. **[x] Create filter UI with category pills**
+    - Pills: [All] [MLOps & Infrastructure] [Data Science & Research]
+    - URL params: `/projects?category=mlops` (or `data-science`, `all`)
+    - Active pill gets primary color styling
+
+18. **[x] Implement client-side filtering with smooth transitions**
+    - Default: Show all projects
+    - Animate filter transitions (fade in/out cards)
+
+**Project Categorization:**
+
+| Project | Category | Featured |
+|---------|----------|----------|
+| Mexico Economic Resilience Data Lake | MLOps & Infrastructure | ✓ |
+| MLOps Time Series Forecasting Pipeline | MLOps & Infrastructure | ✓ |
+| Gravitational Wave Detection | Data Science & Research | ✓ |
+| Route Optimization System | Data Science & Research | ✓ |
+| Environmental Pollution Classification | Data Science & Research | - |
+| Industrial Failure Classification | Data Science & Research | - |
+
+**Phase 3 Technical Notes:**
+
+**Schema Updates:**
+- Added `ProjectCategory` type: `'mlops' | 'data-science'`
+- Extended `Project` interface with: `category: ProjectCategory`, `featured: boolean`, `thumbnail?: string`, `description?: string`
+- All 8 projects categorized with 4 marked as featured (2 MLOps, 2 Data Science)
+
+**New Components Created:**
+
+| Component | Location | Key Features |
+|-----------|----------|--------------|
+| FeaturedWorkSection | `home/` | Filters featured projects, 2x2 responsive grid, staggered AnimatedSection delays |
+| FeaturedProjectCard | `home/` | Category badge (color-coded), top 4 tech badges, GitHub/Demo buttons, hover glow effect |
+| CategoryFilter | `projects/` | 3 filter pills, aria-pressed for accessibility, focus-visible ring styling |
+
+**Custom Hook Created:**
+- `useCategoryFilter.ts` - URL-based filter state management
+  - Uses `useSearchParams` and `useRouter` from `next/navigation`
+  - Validates category param against `['all', 'mlops', 'data-science']`
+  - Shallow routing with `router.push(newUrl, { scroll: false })`
+  - Clean URLs: removes `?category=` param when "all" selected
+
+**Projects Page Architecture:**
+- Wrapped with `<Suspense>` for `useSearchParams` compatibility
+- Crossfade transition animation using `useState` + `setTimeout` (300ms)
+- Dual state pattern: `activeCategory` (URL state) + `displayedCategory` (render state)
+- Empty state handling with "View all projects" reset button
+
+**Styling Patterns:**
+- Category badges: MLOps = `bg-primary/20 text-primary`, Data Science = `bg-purple-500/20 text-purple-400`
+- Hover glow: `hover:border-primary/50 hover:shadow-[0_0_20px_rgba(0,255,136,0.1)]`
+- Filter pills: Active = `bg-primary/20 border-primary text-primary`
+- Responsive grid: `grid-cols-1 md:grid-cols-2` (featured), `grid-cols-1 md:grid-cols-2 lg:grid-cols-3` (projects page)
+
+**Home Page Section Order (Updated):**
+1. HeroSection (with typewriter animation)
+2. **FeaturedWorkSection** (new)
+3. EducationSection
+4. ExperienceSection
+5. CertificationsSection
 
 ### Phase 4: Three.js Animation
-24. Install Three.js dependencies (@react-three/fiber, drei, three)
-25. Create NeuralNetworkCanvas with dynamic import (SSR disabled)
-26. Implement floating nodes using InstancedMesh
-27. Add connection lines with BufferGeometry
-28. Add pulse/glow animation effects
-29. Mobile optimization (reduce nodes, detect low-power devices)
-30. Add fallback gradient for non-WebGL browsers
+19. Install Three.js dependencies (@react-three/fiber, drei, three)
+20. Create NeuralNetworkCanvas with dynamic import (SSR disabled)
+21. Implement floating nodes using InstancedMesh
+22. Add connection lines with BufferGeometry
+23. Add pulse/glow animation effects
+24. Mobile optimization (reduce nodes, detect low-power devices)
+25. Add fallback gradient for non-WebGL browsers
 
 ### Phase 5: Polish & Deploy
-31. Lighthouse optimization (images, fonts, code splitting)
-32. SEO metadata (Open Graph, Twitter cards)
-33. Deploy to Vercel
-34. Final responsive testing
-
----
-
-## Phase 2 Deliverables Summary
-
-**Home Page Components:**
-- ✅ HeroSection with typewriter animation and CTA buttons
-- ✅ SearchPlaceholder with tooltip (future RAG integration)
-- ✅ ExperienceSection with vertical timeline
-- ✅ EducationSection with institution cards
-- ✅ CertificationsSection with circular logo nodes
-
-**Additional Pages:**
-- ✅ Projects page with grid layout and scroll animations
-- ✅ Engineering Log page with article cards and scroll animations
-
-**Animation System:**
-- ✅ useTypewriter hook for dynamic title cycling
-- ✅ useIntersectionObserver hook for scroll detection
-- ✅ AnimatedSection wrapper with staggered delays
-- ✅ CSS keyframe animations (fade-in, cursor-blink)
-
-**Type Definitions:**
-- ✅ Education interface added to types/index.ts
-
-**Build Status:**
-- ✅ `npm run dev` works
-- ✅ `npm run build` passes (zero errors)
-- ✅ `npm run lint` passes (zero warnings)
+26. Lighthouse optimization (images, fonts, code splitting)
+27. SEO metadata (Open Graph, Twitter cards)
+28. Deploy to Vercel
+29. Final responsive testing
 
 ---
 
@@ -284,11 +316,14 @@ portfolio/
 {
   "projects": [{
     "id": "proj-001",
-    "name": "Distributed Key-Value Store",
-    "summary": "A distributed KV store built in Go with Raft consensus",
-    "techStack": ["Go", "gRPC", "Raft"],
+    "name": "Mexico Economic Resilience Data Lake",
+    "summary": "Serverless Medallion Data Lake on AWS...",
+    "description": "Full description for detail page (v2)...",
+    "thumbnail": "/images/projects/mexico_lake.png",
+    "techStack": ["AWS", "S3", "Glue", "Athena", "Apache Airflow"],
     "githubUrl": "https://github.com/...",
     "demoUrl": null,
+    "category": "mlops",
     "featured": true,
     "order": 1
   }]
@@ -316,69 +351,6 @@ portfolio/
 **Files to Create:**
 - `src/components/home/NeuralNetworkCanvas.tsx` - Canvas wrapper
 - `src/lib/three/neural-network.ts` - Animation logic
-
----
-
-## Phase 3: Projects & Engineering Log Details
-
-### Projects Category Filtering
-
-**Data Model Update (projects.json):**
-```json
-{
-  "id": "proj-001",
-  "name": "Project Name",
-  "category": "data-engineering",  // NEW FIELD
-  "tags": ["AWS", "Airflow"],      // Optional: more granular filtering
-  ...
-}
-```
-
-**Category Definitions:**
-| Category | Slug | Projects |
-|----------|------|----------|
-| All | `all` | Show all |
-| Data Engineering | `data-engineering` | proj-001 |
-| MLOps | `mlops` | proj-002 |
-| AI/LLM | `ai-llm` | proj-003 |
-| Data Science | `data-science` | proj-004, proj-006 |
-| Deep Learning | `deep-learning` | proj-005 |
-| Operations Research | `operations-research` | proj-007, proj-008 |
-
-**Components to Create:**
-- `src/components/projects/CategoryFilter.tsx` - Filter pills/tabs UI
-- Update `src/app/projects/page.tsx` - Add filtering logic
-
-**URL Structure:**
-- `/projects` - Show all
-- `/projects?category=mlops` - Filter by category
-
-### Engineering Log - Substack Integration
-
-**Integration Options:**
-
-| Approach | Pros | Cons |
-|----------|------|------|
-| **1. Embed iframe** | Simple, auto-updates | Limited styling, slower load |
-| **2. RSS Feed parsing** | Full styling control, fast | Requires build-time/runtime fetch |
-| **3. Substack API** | Real-time, full control | API may be limited/unofficial |
-| **4. Link out only** | Zero maintenance | Users leave site |
-
-**Recommended: RSS Feed + Link Out Hybrid**
-- Parse Substack RSS at build time (ISR) for article previews
-- Style cards to match terminal theme
-- "Read on Substack" CTA for full articles
-- "Subscribe" button linking to Substack subscription
-
-**Components to Create:**
-- `src/components/engineering-log/SubstackFeed.tsx` - RSS parser component
-- `src/lib/substack.ts` - RSS fetch/parse utility
-- Update `src/app/engineering-log/page.tsx` - Use SubstackFeed
-
-**Substack RSS URL Format:**
-```
-https://yourusername.substack.com/feed
-```
 
 ---
 
@@ -418,11 +390,9 @@ Defined in `src/app/globals.css` using `@theme {}` block:
 - [x] Projects page with grid
 - [x] Engineering Log page (static)
 - [x] Scroll animations (intersection observer)
-- [ ] Projects category filtering (Phase 3)
-- [ ] Engineering Log Substack integration (Phase 3)
+- [x] Featured Work section on home page (Phase 3)
+- [x] Projects category filtering with URL state (Phase 3)
 - [ ] Three.js neural network animation (Phase 4)
-- [ ] ~~Second Brain/Obsidian integration~~ (v2)
-- [ ] ~~RAG-powered search backend~~ (v2)
 
 ---
 
@@ -434,3 +404,68 @@ Defined in `src/app/globals.css` using `@theme {}` block:
 4. **Interactivity:** Hover states on certifications, project cards
 5. **Performance:** Run Lighthouse, target 90+ performance score
 6. **Deploy:** Verify Vercel deployment works with no build errors
+
+---
+
+
+# Version 2 features
+
+- [ ] Project detail pages (`/projects/[slug]`) with full descriptions, screenshots, and architecture diagrams (v2)
+- [ ] Engineering Log Substack integration (v2)
+- [ ] Second Brain/Obsidian integration (v2)
+- [ ] RAG-powered search backend (v2)
+
+
+## v2 Features (Deferred)
+
+### Engineering Log - Substack Integration
+
+**Integration Options:**
+
+| Approach | Pros | Cons |
+|----------|------|------|
+| **1. Embed iframe** | Simple, auto-updates | Limited styling, slower load |
+| **2. RSS Feed parsing** | Full styling control, fast | Requires build-time/runtime fetch |
+| **3. Substack API** | Real-time, full control | API may be limited/unofficial |
+| **4. Link out only** | Zero maintenance | Users leave site |
+
+**Recommended: RSS Feed + Link Out Hybrid**
+- Parse Substack RSS at build time (ISR) for article previews
+- Style cards to match terminal theme
+- "Read on Substack" CTA for full articles
+- "Subscribe" button linking to Substack subscription
+
+**Components to Create:**
+- `src/components/engineering-log/SubstackFeed.tsx` - RSS parser component
+- `src/lib/substack.ts` - RSS fetch/parse utility
+- Update `src/app/engineering-log/page.tsx` - Use SubstackFeed
+
+**Substack RSS URL Format:**
+```
+https://yourusername.substack.com/feed
+```
+
+### Project Detail Pages
+
+**Route:** `/projects/[slug]`
+
+**Features:**
+- Full project description and context
+- Screenshots/demo GIFs
+- Architecture diagrams
+- Detailed tech stack breakdown with explanations
+- Challenges and solutions section
+- Links to GitHub, live demo, related blog posts
+
+**Implementation:**
+- Dynamic routes with `generateStaticParams`
+- Extend `projects.json` with `description`, `images[]`, `challenges[]` fields
+- MDX support for rich content (optional)
+
+### Second Brain/Obsidian Integration
+
+*Details TBD in v2*
+
+### RAG-Powered Search Backend
+
+*Details TBD in v2*

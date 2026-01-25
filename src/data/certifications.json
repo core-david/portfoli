@@ -44,9 +44,9 @@
       "id": "cert-005",
       "name": "Responsible Conduct of Research",
       "issuer": "CITI Program",
-      "logo": "/images/certifications/citi_logo.png",
+      "logo": "/images/certifications/citi_logo.webp",
       "credentialUrl": null,
-      "pdfUrl": "/documents/certifications/citi_program.webp",
+      "pdfUrl": "/documents/certifications/citi_program.pdf",
       "issueDate": null,
       "expiryDate": null
     }

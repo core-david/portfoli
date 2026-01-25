@@ -20,12 +20,13 @@ export default function HeroSection() {
     words: titles,
     typeSpeed: 100,
     deleteSpeed: 50,
-    delayBetweenWords: 2000,
+    delayBetweenWords: 1500,
+    startDelay: 1000,
   });
 
   return (
     <section className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-2">
-      <div className="max-w-4xl w-full text-center space-y-8 animate-fade-in">
+      <div className="max-w-4xl w-full text-center space-y-8">
         {/* Name */}
         <h1 className="text-5xl md:text-7xl font-bold text-text-primary tracking-tight">
           {siteConfig.name}
