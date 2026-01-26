@@ -22,7 +22,7 @@ export interface Experience {
   endDate: string | null;
   current: boolean;
   impactPoints: string[];
-  techStack: string[];
+  techStack?: string[];
 }
 
 export interface Certification {
