@@ -37,7 +37,7 @@ export default function TimelineItem({ experience }: TimelineItemProps) {
               src={experience.companyLogo}
               alt={`${experience.company} logo`}
               fill
-              className="object-contain"
+              className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
             />
           </div>
 
@@ -81,13 +81,6 @@ export default function TimelineItem({ experience }: TimelineItemProps) {
             </li>
           ))}
         </ul>
-
-        {/* Tech stack */}
-        <div className="flex flex-wrap gap-1.5 md:gap-2">
-          {experience.techStack.map((tech, index) => (
-            <TechBadge key={index} tech={tech} />
-          ))}
-        </div>
       </div>
     </div>
   );

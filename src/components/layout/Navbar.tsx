@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import Container from './Container';
 
@@ -81,12 +82,18 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <Container>
         <div className="flex items-center justify-between h-16">
-          {/* Logo/Name */}
+          {/* Logo */}
           <Link
             href="/"
-            className="text-xl font-bold text-primary hover:text-primary-dim transition-colors"
+            className="hover:opacity-80 transition-opacity"
           >
-            &lt;dev /&gt;
+            <Image
+              src="/favicon/android-chrome-192x192.png"
+              alt="Logo"
+              width={40}
+              height={40}
+              className="w-10 h-10"
+            />
           </Link>
 
           {/* Desktop Navigation */}

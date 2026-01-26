@@ -5,6 +5,8 @@ import { SiGithub, SiLinkedin, SiLeetcode } from 'react-icons/si';
 import siteConfig from '@/data/site-config.json';
 import { useTypewriter } from '@/hooks/useTypewriter';
 import SearchPlaceholder from './SearchPlaceholder';
+import NeuralNetworkCanvas from './NeuralNetworkCanvas';
+
 
 export default function HeroSection() {
   const whatsappUrl = `https://wa.me/${siteConfig.whatsappNumber.replace(/[^0-9]/g, '')}`;
@@ -25,8 +27,11 @@ export default function HeroSection() {
   });
 
   return (
-    <section className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-2">
-      <div className="max-w-4xl w-full text-center space-y-8">
+    <section id="hero" className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-2 relative">
+      {/* Neural Network Animation Canvas */}
+      <NeuralNetworkCanvas />
+
+      <div className="max-w-4xl w-full text-center space-y-8 relative z-10">
         {/* Name */}
         <h1 className="text-5xl md:text-7xl font-bold text-text-primary tracking-tight">
           {siteConfig.name}

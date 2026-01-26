@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import TechBadge from '@/components/experience/TechBadge';
 
 interface EducationCardProps {
   id: string;
@@ -59,7 +58,7 @@ export default function EducationCard({
             alt={`${institution} logo`}
             width={64}
             height={64}
-            className="w-10 h-10 md:w-16 md:h-16 object-contain flex-shrink-0"
+            className="w-10 h-10 md:w-16 md:h-16 object-contain flex-shrink-0 grayscale group-hover:grayscale-0 transition-all duration-300"
           />
 
           {/* Degree */}
@@ -144,11 +143,9 @@ export default function EducationCard({
 
         {/* Relevant Coursework */}
         {relevantCoursework && relevantCoursework.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 md:gap-2">
-            {relevantCoursework.map((course, index) => (
-              <TechBadge key={index} tech={course} />
-            ))}
-          </div>
+          <p className="text-sm text-text-secondary">
+            <span className="font-medium">Relevant Courses:</span> {relevantCoursework.join(', ')}
+          </p>
         )}
       </div>
     </div>

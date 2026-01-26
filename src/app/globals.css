@@ -6,8 +6,11 @@
   --color-background: #0a0a0a;
   --color-surface: #141414;
   --color-border: #262626;
-  --color-primary: #00ff88;
-  --color-primary-dim: #00cc6a;
+ /* Primary Colors */
+  --color-primary: #a882ff;       /* Obsidian Purple */
+  --color-primary-dim: #5f42a6;   /* Darker, muted purple variant */
+
+  /* Text Colors */
   --color-text-primary: #e5e5e5;
   --color-text-secondary: #a3a3a3;
   --color-text-muted: #737373;
@@ -53,3 +56,9 @@ body {
   animation: cursor-blink 1s infinite;
 }
 
+/* Hide elements on non-hover devices (mobile/touch) */
+@media (hover: none) {
+  .hover-device\:block {
+    display: none !important;
+  }
+}

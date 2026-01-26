@@ -51,7 +51,7 @@ export default function CertificationNode({
             src={logo}
             alt={`${name} certification`}
             fill
-            className="object-contain p-2"
+            className="object-contain p-2 grayscale group-hover:grayscale-0 transition-all duration-300"
             sizes="80px"
           />
         </div>

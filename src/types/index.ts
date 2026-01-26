@@ -36,18 +36,13 @@ export interface Certification {
   expiryDate: string | null;
 }
 
-export type ProjectCategory = 'mlops' | 'data-science';
-
 export interface Project {
   id: string;
   name: string;
   summary: string;
   description?: string;
-  thumbnail?: string;
-  techStack: string[];
   githubUrl: string | null;
   demoUrl: string | null;
-  category: ProjectCategory;
   featured: boolean;
   order: number;
 }

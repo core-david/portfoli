@@ -239,21 +239,36 @@ portfolio/
 4. ExperienceSection
 5. CertificationsSection
 
-### Phase 4: Three.js Animation
-19. Install Three.js dependencies (@react-three/fiber, drei, three)
-20. Create NeuralNetworkCanvas with dynamic import (SSR disabled)
-21. Implement floating nodes using InstancedMesh
-22. Add connection lines with BufferGeometry
-23. Add pulse/glow animation effects
-24. Mobile optimization (reduce nodes, detect low-power devices)
-25. Add fallback gradient for non-WebGL browsers
+**Projects Page UI Refinements:**
+- Changed project card title color from primary (green) to white
+- Removed "Featured" badge pill from project cards
+- Replaced plain text GitHub/Demo links with styled pill buttons
+- Added GitHub logo SVG icon to GitHub pill
+- Added external link icon to Live Demo pill
 
-### Phase 5: Polish & Deploy
-26. Lighthouse optimization (images, fonts, code splitting)
-27. SEO metadata (Open Graph, Twitter cards)
-28. Deploy to Vercel
-29. Final responsive testing
+### Phase 4: Basic Neural Network Three.js Animation
+Goal: to have a simple neural network animation that exists around the cursor, and just lives inside the hero section
+19. We already have installed the libraries: @react-three/fiber, drei, three
+20. The nodes and connections needs to be grey and dim grey
 
+### Phase 5: Optmizations
+22. Mobile optimization (reduce nodes, detect low-power devices)
+23. Add fallback gradient for non-WebGL browsers
+
+### Phase 6: Polish & Deploy
+24. Lighthouse optimization (images, fonts, code splitting)
+25. SEO metadata (Open Graph, Twitter cards)
+26. Deploy to Vercel
+27. Final responsive testing
+
+
+To dos: 
+- change the color of the pulses to purple
+- make the svg images grey and until the cursor is in the card it show the real colors accros the education section, experience, and certifications
+- add a intertia to the nodes and connections, so it reacts like when you pull something in real life, not all the nodes moving at the same speed, it seems not natural
+- check the console warnings
+- add a favicon to the tab
+- add the favicon instead of dev in the navbar
 ---
 
 ## Data Schemas
