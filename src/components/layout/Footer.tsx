@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Copyright */}
           <p className="text-sm text-text-muted">
-            Made with {'<3'} by David Vargas and Claude Code 
+            Made with {'<3'} by David Vargas
           </p>
 
           {/* Social Links */}
